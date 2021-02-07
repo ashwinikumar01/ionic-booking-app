@@ -22,10 +22,10 @@ const routes: Routes = [
       ]
     },
       {
-        path: 'offers',                 // same as given in tab
+        path: 'offers',                    // same as given in tab
         children: [
         {
-          path: '',                     // reaching point
+          path: '',                       // reaching point
           loadChildren: () => import('./offers/offers.module').then( m => m.OffersPageModule)
         },
         {
