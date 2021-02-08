@@ -21,7 +21,7 @@ export class DiscoverPage implements OnInit {
   ngOnInit() {
     this.loadedPlaces = this.placesService.places;
     console.log(this.loadedPlaces);
-    this.listedLoadedPlaces = this.loadedPlaces.slice(1);
+    this.listedLoadedPlaces = this.loadedPlaces.slice(1);              //only for for virtual scroll
   }
 
   onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>) {

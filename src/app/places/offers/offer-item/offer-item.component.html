@@ -5,8 +5,12 @@
   <ion-label>
     <h1> {{ offer.title }} </h1>
     <!-- <p> {{ offer.description }} </p> -->
-    <div>
-      
+    <div class="offer-details">
+      <ion-icon name="calendar" color="primary"></ion-icon>
+      <ion-text color="tertiary"> {{ getDummyDate() | date }} </ion-text>
+      <span>to</span>
+      <ion-icon class="space-left" name="calendar" color="primary"></ion-icon>
+      <ion-text color="tertiary"> {{ getDummyDate() | date }} </ion-text>
     </div>
   </ion-label>
 </ion-item>

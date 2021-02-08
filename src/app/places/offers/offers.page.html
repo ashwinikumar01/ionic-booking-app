@@ -18,7 +18,7 @@
       <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
         <ion-list>
           <ion-item-sliding *ngFor="let offer of offers" #slidingItem>      <!-- using refer. variable to hide edit option while sliding -->
-   
+            <offer-item [offer]="offer"></offer-item>
             <ion-item-options side="end">
               <ion-item-option color="secondary" (click)="onEdit(offer.id, slidingItem)">
                 Edit
@@ -31,4 +31,77 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Offers</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/places/tabs/offers/new">
+        <ion-icon name="add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        <ion-list>
+          <ion-item-sliding *ngFor="let offer of offers" #slidingItem>      <!-- using refer. variable to hide edit option while sliding -->
+            <!-- <ion-item [routerLink]="['/', 'places', 'tabs', 'offers', offer.id]" detail>
+              <ion-thumbnail slot="start">
+                <ion-img [src]="offer.imageUrl"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                <h2> {{ offer.title }} </h2>
+                <p> {{ offer.description }} </p>
+              </ion-label>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="secondary" (click)="onEdit(offer.id, slidingItem)">
+                Edit
+                <ion-icon name="create" slot="end"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content> -->
 

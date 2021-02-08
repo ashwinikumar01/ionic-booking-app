@@ -1,0 +1,19 @@
+h1 {
+    font-size: 1.1rem;
+    border: 1px solid var(--ion-color-primary);
+    padding: 6px;
+    border-radius: 5px;
+    color: var(--ion-color-primary);
+}
+
+.offer-details {
+    align-items: center;
+
+    .space-left {
+        margin-left: 5px;
+    }
+}
+
+// ion-text {
+//   font-style: italic;
+// }
