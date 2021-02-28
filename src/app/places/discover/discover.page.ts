@@ -24,9 +24,14 @@ export class DiscoverPage implements OnInit {
     this.listedLoadedPlaces = this.loadedPlaces.slice(1);              //only for for virtual scroll
   }
 
-  onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>) {
-    console.log(event.detail);
+  // onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>) {
+  //   console.log(event.detail, event);
+  // }
+
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
   }
+
 
   // onOpenMenu() {
   //   this.menuCtrl.toggle();

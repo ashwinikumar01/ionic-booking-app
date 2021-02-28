@@ -40,29 +40,31 @@ export class PlaceDetailPage implements OnInit {
     // this.router.navigateByUrl('/places/tabs/discover');
     // this.navCtrl.navigateBack('/places/tabs/discover');
     // this.navCtrl.pop();
-    this.actionSheetCtrl.create({
-      header: 'Choose an Action',
-      buttons: [
-        {
-          text: 'Select Date',
-          handler: () => {
-            this.openBookingModal('select');
-          }
-        },
-        {
-          text: 'Random Date',
-          handler: () => {
-            this.openBookingModal('random');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ],
-    }).then(actionSheetEl => {
+    this.actionSheetCtrl
+      .create({
+        header: 'Choose an Action',
+        buttons: [
+          {
+            text: 'Select Date',
+            handler: () => {
+              this.openBookingModal('select');
+            },
+          },
+          {
+            text: 'Random Date',
+            handler: () => {
+              this.openBookingModal('random');
+            },
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+        ],
+      })
+      .then((actionSheetEl) => {
         actionSheetEl.present();
-    });
+      });
   }
 
   openBookingModal(mode: 'select' | 'random') {
@@ -70,7 +72,7 @@ export class PlaceDetailPage implements OnInit {
     this.modalCtrl
       .create({
         component: CreateBookingComponent,
-        componentProps: { selectedPlace: this.place },
+        componentProps: { selectedPlace: this.place, selectedMode: mode },
       })
       .then((modalEl) => {
         modalEl.present();
@@ -84,17 +86,6 @@ export class PlaceDetailPage implements OnInit {
       });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -155,19 +146,3 @@ export class PlaceDetailPage implements OnInit {
 //   }
 
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
