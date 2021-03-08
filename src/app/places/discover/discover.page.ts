@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Place } from '../place.model';
 import { PlacesService } from '../places.service';
-import { SegmentChangeEventDetail } from '@ionic/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -16,6 +15,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
   listedLoadedPlaces: Place[];
   relevantPlaces: Place[];
   private placesSub: Subscription;
+  private chosenFilter = 'all';
 
   constructor(
     private placesService: PlacesService,
@@ -26,32 +26,37 @@ export class DiscoverPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.placesSub = this.placesService.places.subscribe((places) => {
       this.loadedPlaces = places;
-      this.relevantPlaces = this.loadedPlaces;
-      this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+      if (this.chosenFilter === 'all') {
+        this.relevantPlaces = this.loadedPlaces;
+        this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+      } else {
+        this.relevantPlaces = this.loadedPlaces.filter(
+          (place) => place.userId !== this.authService.userId
+        );
+        this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+      }
     });
   }
 
   // ngOnInit() {
-  //   this.placesSub = this.placesService.places.subscribe((places) => {
+  //   this.placesSub = this.placesService.places.subscribe(places => {
   //     this.loadedPlaces = places;
-  //     this.listedLoadedPlaces = this.loadedPlaces.slice(1);
+  //     this.relevantPlaces = this.loadedPlaces;
+  //     this.listedLoadedPlaces = this.relevantPlaces.slice(1);
   //   });
-  //   console.log(this.loadedPlaces);
   // }
-
-  onOpenMenu() {
-    this.menuCtrl.toggle();
-  }
 
   onFilterUpdate(event: any) {
     if (event.detail.value === 'all') {
       this.relevantPlaces = this.loadedPlaces;
       this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+      this.chosenFilter = 'all';
     } else {
       this.relevantPlaces = this.loadedPlaces.filter(
         (place) => place.userId !== this.authService.userId
       );
       this.listedLoadedPlaces = this.relevantPlaces.slice(1);
+      this.chosenFilter = 'bookable';
     }
   }
 
@@ -66,7 +71,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
     }
   }
 
-  // onOpenMenu() {
-  //   this.menuCtrl.toggle();
-  // }
+  onOpenMenu() {
+    this.menuCtrl.toggle();
+  }
 }
