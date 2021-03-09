@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Place } from './place.model';
 import { take, map, tap, delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +50,7 @@ export class PlacesService {
     return this._places.asObservable();
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private http: HttpClient) {}
 
   getPlace(id: string) {
     return this.places.pipe(
@@ -77,14 +78,23 @@ export class PlacesService {
       dateTo,
       this.authService.userId
     );
-    // this._places.push(newPlace);
-    return this.places.pipe(
-      take(1),
-      delay(1000),
-      tap((places) => {
-        this._places.next(places.concat(newPlace));
-      })
-    );
+    return this.http
+      .post(
+        'https://ionic-angular-b1f0c-default-rtdb.firebaseio.com/offered-places.json',
+        { ...newPlace, id: null }
+      )
+      .pipe(
+        tap((resData) => {
+          console.log(resData);
+        })
+      );
+    // return this.places.pipe(
+    //   take(1),
+    //   delay(1000),
+    //   tap((places) => {
+    //     this._places.next(places.concat(newPlace));
+    //   })
+    // );
   }
 
   updatePlace(placeId: string, title: string, description: string) {
